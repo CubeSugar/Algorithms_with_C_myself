@@ -11,7 +11,7 @@ typedef struct ListElmt_
 {
 	/* data */
 	void *data;
-	struct ListElmt *next;
+	struct ListElmt_ *next;
 } ListElmt;
 
 //Define a structure for linked lists.
