@@ -27,33 +27,33 @@ typedef struct CList_
  *
  *function:	初始化循环链表
  */
- void initCList(Clist *clist, void (*destroy)(void *data));
+void initCList(Clist *clist, void (*destroy)(void *data));
 
- /*name:	destroyCList()
+/*name:	destroyCList()
  *input:	CList *clist
  *
  *return:	none
  *
  *function:	销毁循环链表
  */
- void destroyCList(CList *clist);
+void destroyCList(CList *clist);
 
- /*name:	insertCListElmt()
+/*name:	insertCListElmt()
  *input:	CList *clist, CListElmt *celement, const void *data
  *
  *return:	success 0, false -1
  *
  *function:	在指定元素后插入新元素
  */
- int insertCListElmt(CList *clist, CListElmt *celement, const void *data);
+int insertCListElmt(CList *clist, CListElmt *celement, const void *data);
 
- /*name:	removeCListElmt()
+/*name:	removeCListElmt()
  *input:	CList *clist, CListElmt *celement, void **data
  *
  *return:	success 0, false -1
  *
  *function:	删除指定元素
  */
- int removeCListElmt(CList *clist, CListElmt *celement, void **data);
+int removeCListElmt(CList *clist, CListElmt *celement, void **data);
 
- #endif
+#endif
