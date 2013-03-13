@@ -8,7 +8,9 @@ Algorithms_with_C_myself
 No. |task                            |file	     |include<> |progress  
 :--:|:-------------------------------|:---------|:---------|--------:
 1   |Linked List Interface           |list.h    |          |100% 
-    |LList Interface implementation  |list.c    |list.h    |
+    |LList Interface implementation  |list.c    |list.h    |100%
 2   |Doubly Linked List Interface    |dlist.h   |          |100%
-    |DList Interface implementation  |dlist.c   |dlist.h   |
+    |DList Interface implementation  |dlist.c   |dlist.h   |100%
+3   |Circular Linked List Interface  |clist.h   |          |100%
+    |CList Interface implementation  |clist.c   |clist.h   |100%
 
