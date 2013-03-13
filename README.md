@@ -5,7 +5,10 @@ Algorithms_with_C_myself
 
 进度：
 
-序号|内容  |完成度  
-:--:|:---|-----:
-1|单链表接口与实现|100% 
-2|双链表|10%
+No. |task                            |file	     |include<> |progress  
+:--:|:-------------------------------|:---------|:---------|--------:
+1   |Linked List Interface           |list.h    |          |100% 
+    |LList Interface implementation  |list.c    |list.h    |
+2   |Doubly Linked List Interface    |dlist.h   |          |100%
+    |DList Interface implementation  |dlist.c   |dlist.h   |
+
