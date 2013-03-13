@@ -42,15 +42,15 @@ void destroyList(List *list)
 	//逐个删除链表element
 	while(list.size > 0)
 	{
-		//removeElmt()作为判断条件的一部分，每次都会执行。
+		//removeElmtNext()作为判断条件的一部分，每次都会执行。
 		//若List初始化时指定了释放数据域指针空间的方法，则调用该方法释放数据域指针。
-		if (removeElmt(list, NULL, (void **)&data) == 0 && list.destroy != NULL)
+		if (removeElmtNext(list, NULL, (void **)&data) == 0 && list.destroy != NULL)
 		{
 			//释放数据域指针空间
 			list.destroy(data);
 		}
 		//若初始化方法中指定了缺省的释放方法，则可采用以下语句：
-		//removeElmt(list, NULL, (void **)&data);
+		//removeElmtNext(list, NULL, (void **)&data);
 		//list.destroy(data);
 	}
 
@@ -104,7 +104,7 @@ int insertElmt(List *list, ListElmt *element, const void *data)
 	return 0;
 }
 
-/*name:		removeElmt()
+/*name:		removeElmtNext()
  *input:	List *list, ListElmt *element, void **data
  			链表；待删除位置的前驱元素；指向被删除元素的指针
  *return:	移除成功返回0，否则返回-1。
@@ -112,7 +112,7 @@ int insertElmt(List *list, ListElmt *element, const void *data)
  *			如果element设置为NULL，则移除链表头元素。
  *			调用返回后，data指向已移除元素中存储的数据。
  */
-int removeElmt(List *list, ListElmt *element, void **data)
+int removeElmtNext(List *list, ListElmt *element, void **data)
 {
 	ListElmt *old_element;
 
