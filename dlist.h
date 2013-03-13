@@ -8,8 +8,8 @@ typedef struct DListElmt_
 {
 	//数据域是指针域
 	void *data;
-	DListElmt_ *next;
-	DListElmt_ *prev;
+	struct DListElmt_ *next;
+	struct DListElmt_ *prev;
 } DListElmt;
 
 //Define a structure for doubly-linked lists
