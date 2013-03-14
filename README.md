@@ -13,4 +13,11 @@ No. |task                            |file	     |include<> |progress
     |DList Interface implementation  |dlist.c   |dlist.h   |100%
 3   |Circular Linked List Interface  |clist.h   |          |100%
     |CList Interface implementation  |clist.c   |clist.h   |100%
+4   |Stack Interface                 |stack.h   |list.h    |100%
+    |Stack INterface implementation  |stack.c   |list.h    |100%
+    |                                |          |stack.h   |100%
+5   |Queue Interface                 |queue.h   |list.h    |100%
+    |Queue Interface implementation  |queue.c   |list.h    |100%
+    |                                |          |queue.h   |100%
+
 
