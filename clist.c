@@ -32,7 +32,7 @@ void destroyCList(CList *clist)
 
  	while (clist.size > 0)
  	{
- 		if (removeCListElmt(clist, clist.head, (void **)&data) == 0 && clist.destroy != NULL)
+ 		if (removeCListElmtNext(clist, clist.head, (void **)&data) == 0 && clist.destroy != NULL)
  		{
  			clist.destroy(data);
  		}
@@ -41,14 +41,14 @@ void destroyCList(CList *clist)
  	memset(clist, 0, sizeof(CList));
 }
 
-/*name:	insertCListElmt()
+/*name:	insertCListElmtNext()
  *input:	CList *clist, CListElmt *celement, const void *data
  *
  *return:	success 0, false -1
  *
  *function:	在指定元素后插入新元素
  */
-int insertCListElmt(CList *clist, CListElmt *celement, const void *data)
+int insertCListElmtNext(CList *clist, CListElmt *celement, const void *data)
 {
  	CListElmt *new_element;
  	if ((new_element = (CListElmt *)malloc(sizeof(CListElmt))) == NULL)
@@ -75,7 +75,7 @@ int insertCListElmt(CList *clist, CListElmt *celement, const void *data)
  	return 0;
 }
 
-/*name:	removeCListElmt()
+/*name:	removeCListElmtNext()
  *input:	CList *clist, CListElmt *celement, void **data
  *
  *return:	success 0, false -1

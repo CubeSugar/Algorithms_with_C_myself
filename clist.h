@@ -38,22 +38,22 @@ void initCList(Clist *clist, void (*destroy)(void *data));
  */
 void destroyCList(CList *clist);
 
-/*name:	insertCListElmt()
+/*name:	insertClistElmtNext()
  *input:	CList *clist, CListElmt *celement, const void *data
  *
  *return:	success 0, false -1
  *
  *function:	在指定元素后插入新元素
  */
-int insertCListElmt(CList *clist, CListElmt *celement, const void *data);
+int insertClistElmtNext(CList *clist, CListElmt *celement, const void *data);
 
-/*name:	removeCListElmt()
+/*name:	removeCListElmtNext()
  *input:	CList *clist, CListElmt *celement, void **data
  *
  *return:	success 0, false -1
  *
  *function:	删除指定元素
  */
-int removeCListElmt(CList *clist, CListElmt *celement, void **data);
+int removeCListElmtNext(CList *clist, CListElmt *celement, void **data);
 
 #endif
