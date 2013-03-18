@@ -19,6 +19,7 @@ typedef struct List_
 {
 	/* data */
 	int size;
+	//判断2个成员是否匹配，若匹配返回1，否则返回0
 	int (*match)(const void *key1, const void *key2);
 
 	//释放数据域指针空间的方法，常用free

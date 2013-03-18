@@ -12,7 +12,7 @@ typedef ListElmt SetElmt;
 
 /*name:		initSet()
  *input:	Set *set, int (*match)(const void *key1,const void *key2), void (*destroy)(void *data)
- *			集合；匹配方法；销毁方法
+ *			集合；匹配方法（匹配返回1，否则0）；销毁方法
  *return:	none
  *function:	initial Set
  *
@@ -29,7 +29,7 @@ void initSet(Set *set, int (*match)(const void *key1,const void *key2), void (*d
 
 /*name:		insertSetElmt()
  *input:	Set *set, const void *data
- *return:	success 0, false -1
+ *return:	already exist 1，insert success 0, false -1
  *function:	insert Set Element
  *
  */
