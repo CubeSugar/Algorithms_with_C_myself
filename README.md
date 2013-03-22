@@ -19,5 +19,8 @@ No. |task                            |file	     |include<> |progress
 5   |Queue Interface                 |queue.h   |list.h    |100%
     |Queue Interface implementation  |queue.c   |list.h    |100%
     |                                |          |queue.h   |100%
+6   |Set Interface                   |set.h     |list.h    |100%
+    |Set Interface implementation    |set.c     |list.h    |100%
+    |                                |          |set.h     |100%
 
 

@@ -10,7 +10,7 @@
  */
 int enQueue(Queue *queue, const void *data)
 {
-	return insertListElmtNext(queue, queue.tail, data);
+	return insertListElmtNext(queue, queue->tail, data);
 }
 
 /*name:		deQueue()

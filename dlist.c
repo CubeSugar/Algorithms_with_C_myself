@@ -11,17 +11,17 @@
  */
 void initDList(DList *dlist, void (*destroy)(void *data))
 {
-	dlist.size = 0;
-	dlist.head = NULL;
-	dlist.tail = NULL;
+	dlist->size = 0;
+	dlist->head = NULL;
+	dlist->tail = NULL;
 	//初始化释放数据域指针方法，缺省为free()
 	if (destroy != NULL)
 	{
-		dlist.destroy = destroy;
+		dlist->destroy = destroy;
 	}
 	else
 	{
-		dlist.destroy = free;
+		dlist->destroy = free;
 	}
 }
 
@@ -35,12 +35,12 @@ void destroyDList(DList *dlist)
 {
 	void *data;
 
-	whlie (dlist.size > 0)
+	whlie (dlist->size > 0)
 	{
 		//从链表尾部逐个删除元素，并释放数据域空间，&&连接判断条件后部分在使用缺省方法后可省略
-		if (removeDListElmt(dlist, dlist.tail, (void **)&data) == 0 && dlist.destroy != NULL)
+		if (removeDListElmt(dlist, dlist->tail, (void **)&data) == 0 && dlist->destroy != NULL)
 		{
-			dlist.destroy(data);
+			dlist->destroy(data);
 		}
 	}
 
@@ -58,7 +58,7 @@ int insertDListElmtNext(DList *dlist, DListElmt *delement, const void *data)
 	DListElmt *new_delement;
 
 	//防止在非空链表中插入空元素，使head，tail等指针混乱
-	if (delement == NULL && dlist.size != 0)
+	if (delement == NULL && dlist->size != 0)
 	{
 		return -1;
 	}
@@ -68,37 +68,37 @@ int insertDListElmtNext(DList *dlist, DListElmt *delement, const void *data)
 		return -1;
 	}
 
-	new_delement.data = (void *)data;
+	new_delement->data = (void *)data;
 
-	if (dlist.size == 0)
+	if (dlist->size == 0)
 	{
 		//链表为空时
-		dlist.head      = new_delement;
-		dlist.head.prev = NULL;
-		dlist.head.next = NULL;
-		dlist.tail      = new_delement;
+		dlist->head       = new_delement;
+		dlist->head->prev = NULL;
+		dlist->head->next = NULL;
+		dlist->tail       = new_delement;
 	}
 	else
 	{
 		//链表非空
-		new_delement.next = delement.next;
-		new_delement.prev = delement;
+		new_delement->next = delement->next;
+		new_delement->prev = delement;
 
-		if (delement.next == NULL)
+		if (delement->next == NULL)
 		{
 			//在尾部插入元素时
-			dlist.tail = new_delement;
+			dlist->tail = new_delement;
 		}
 		else
 		{
-			delement.next.prev = new_delement;
+			delement->next->prev = new_delement;
 		}
 
-		delement.next = new_delement;
+		delement->next = new_delement;
 	}
 
 	//修改链表长度
-	dlist.size++;
+	dlist->size++;
 	return 0;
 }
 
@@ -113,7 +113,7 @@ int insertDListElmtPrev(DList *dlist, DListElmt *delement, const void *data)
 	DListElmt *new_delement;
 
 	//防止在非空链表中插入空元素，使head，tail等指针混乱
-	if (delement == NULL && dlist.size != 0)
+	if (delement == NULL && dlist->size != 0)
 	{
 		/* code */
 		return -1;
@@ -125,37 +125,37 @@ int insertDListElmtPrev(DList *dlist, DListElmt *delement, const void *data)
 		return -1;
 	}
 
-	new_delement.data = (void *)data;
+	new_delement->data = (void *)data;
 
-	if (dlist.size == 0)
+	if (dlist->size == 0)
 	{
 		//链表为空时
-		dlist.head      = new_delement;
-		dlist.head.prev = NULL;
-		dlist.head.next = NULL;
-		dlist.tail      = new_delement;
+		dlist->head       = new_delement;
+		dlist->head->prev = NULL;
+		dlist->head->next = NULL;
+		dlist->tail       = new_delement;
 	}
 	else
 	{
 		//链表非空时
-		new_delement.next = delement;
-		new_delement.prev = delement.prev;
+		new_delement->next = delement;
+		new_delement->prev = delement->prev;
 
-		if (delement.prev == NULL)
+		if (delement->prev == NULL)
 		{
 			//在链表头插入元素
-			dlist.head = new_delement;
+			dlist->head = new_delement;
 		}
 		else
 		{
-			delement.prev.next = new_delement;
+			delement->prev->next = new_delement;
 		}
 
-		delement.prev = new_delement;
+		delement->prev = new_delement;
 	}
 
 	//修改链表长度
-	dlist.size++;
+	dlist->size++;
 	return 0;
 }
 
@@ -168,39 +168,39 @@ int insertDListElmtPrev(DList *dlist, DListElmt *delement, const void *data)
 int removeDListElmt(DList *dlist, DListElmt *delement, void **data)
 {
 	//防止删除空元素或从空链表中删除元素
-	if (delement == NULL || dlist.size == 0)
+	if (delement == NULL || dlist->size == 0)
 	{
 		return -1;
 	}
 
-	*data = delement.data;
+	*data = delement->data;
 
-	if (delement == dlist.head)
+	if (delement == dlist->head)
 	{
 		//删除链表头节点
-		dlist.head = delement.next;
+		dlist->head = delement->next;
 
-		if (dlist.head == NULL)
+		if (dlist->head == NULL)
 		{
 			//删除后链表为空
-			dlist.tail = NULL;
+			dlist->tail = NULL;
 		}
 		else
 		{
-			delement.next.prev = NULL;
+			delement->next->prev = NULL;
 		}
 	}
 	else
 	{
-		delement.prev.next = delement.next;
-		if (delement.next == NULL)
+		delement->prev->next = delement->next;
+		if (delement->next == NULL)
 		{
 			//删除节点为尾节点
-			dlist.tail = delement.prev;
+			dlist->tail = delement->prev;
 		}
 		else
 		{
-			delement.next.prev = delement.prev;
+			delement->next->prev = delement->prev;
 		}
 	}
 
@@ -208,6 +208,6 @@ int removeDListElmt(DList *dlist, DListElmt *delement, void **data)
 	free(delement);
 
 	//修改链表长度
-	dlist.size--;
+	dlist->size--;
 	return 0;
 }

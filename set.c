@@ -14,7 +14,7 @@
 void initSet(Set *set, int (*match)(const void *key1,const void *key2), void (*destroy)(void *data))
 {
 	initList(set, destroy);
-	set.match = match;
+	set->match = match;
 }
 
 /*name:		insertSetElmt()
@@ -30,7 +30,7 @@ int insertSetElmt(Set *set, const void *data)
 		return 1;
 	}
 
-	return insertListElmtNext(set, set.tail, data);
+	return insertListElmtNext(set, set->tail, data);
 }
 
 /*name:		removeSetElmt()
@@ -45,10 +45,10 @@ int removeSetElmt(Set *set, void **data)
 
 	prev = NULL;
 
-	for (member = set.head; member != NULL; member = member.next)
+	for (member = set->head; member != NULL; member = member->next)
 	{
 		/* code */
-		if (set.match(*data, member.data))
+		if (set->match(*data, member->data))
 		{
 			break;
 		}
@@ -74,13 +74,13 @@ int unionSet(Set *set_u, const Set *set1, const Set *set2)
 	SetElmt *member;
 	void *data;
 
-	initSet(set_u, set1.match, NULL);
+	initSet(set_u, set1->match, NULL);
 
-	for (member = set1.head; member != NULL; member = member.next)
+	for (member = set1->head; member != NULL; member = member->next)
 	{
 		/* code */
-		data = member.data;
-		if (insertListElmtNext(set_u, set_u.tail, data) != 0)
+		data = member->data;
+		if (insertListElmtNext(set_u, set_u->tail, data) != 0)
 		{
 			/* code */
 			destroySet(set_u);
@@ -88,18 +88,18 @@ int unionSet(Set *set_u, const Set *set1, const Set *set2)
 		}
 	}
 
-	for (member = set2.head; member != NULL; member = member.next)
+	for (member = set2->head; member != NULL; member = member->next)
 	{
 		/* code */
-		if (isSetMember(set1, member.data))
+		if (isSetMember(set1, member->data))
 		{
 			/* code */
 			continue;
 		}
 		else
 		{
-			data = member.data;
-			if (insertListElmtNext(set_u, set_u.tail, data) != 0)
+			data = member->data;
+			if (insertListElmtNext(set_u, set_u->tail, data) != 0)
 			{
 				/* code */
 				destroySet(set_u);
@@ -122,17 +122,17 @@ int intersectionSet(Set *set_i, const Set *set1, const Set *set2)
 	SetElmt *member;
 	void *data;
 
-	initSet(set_i, set1.match, NULL);
+	initSet(set_i, set1->match, NULL);
 
-	for (member = set1.head; member != NULL; member = member.next)
+	for (member = set1->head; member != NULL; member = member->next)
 	{
 		/* code */
-		if (isSetMember(set2, member.data))
+		if (isSetMember(set2, member->data))
 		{
 			/* code */
-			data = member.data;
+			data = member->data;
 
-			if (insertListElmtNext(set_i, set_i.tail, data) != 0)
+			if (insertListElmtNext(set_i, set_i->tail, data) != 0)
 			{
 				/* code */
 				destroySet(set_i);
@@ -155,17 +155,17 @@ int differenceSet(Set *set_d, const Set *set1, const Set *set2)
 	SetElmt *member;
 	void *data;
 
-	initSet(set_d, set1.match, NULL);
+	initSet(set_d, set1->match, NULL);
 
-	for (member = set1.head; member != NULL; member = member.next)
+	for (member = set1->head; member != NULL; member = member->next)
 	{
 		/* code */
-		if (!isSetMember(set2, member.data))
+		if (!isSetMember(set2, member->data))
 		{
 			/* code */
-			data = member.data;
+			data = member->data;
 
-			if (insertListElmtNext(set_d, set_d.tail, data) != 0)
+			if (insertListElmtNext(set_d, set_d->tail, data) != 0)
 			{
 				/* code */
 				destroySet(set_d);
@@ -187,10 +187,10 @@ int isSetMember(const Set *set, const void *data)
 {
 	SetElmt *member;
 
-	for (member = set.head; member != NULL; member = member.next)
+	for (member = set->head; member != NULL; member = member->next)
 	{
 		/* code */
-		if (set.match(data, member.data))
+		if (set->match(data, member->data))
 		{
 			//!!!!!
 			return 1;
@@ -210,16 +210,16 @@ int isSubSet(const Set *set1, const Set *set2)
 {
 	SetElmt *member;
 
-	if (set1.size > set2.size)
+	if (set1->size > set2->size)
 	{
 		/* code */
 		return 0;
 	}
 
-	for (member = set1.head; member != NULL; member = member.next)
+	for (member = set1->head; member != NULL; member = member->next)
 	{
 		/* code */
-		if (!isSetMember(set2, member.data))
+		if (!isSetMember(set2, member->data))
 		{
 			/* code */
 			return 0;
@@ -237,7 +237,7 @@ int isSubSet(const Set *set1, const Set *set2)
  */
 int isSetEqual(const Set *set1, const Set *set2)
 {
-	if (set1.size != set2.size)
+	if (set1->size != set2->size)
 	{
 		/* code */
 		return 0;

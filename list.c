@@ -12,21 +12,11 @@
  */
 void initList(List *list, void (*destroy)(void *data))
 {
-	list.size    = NULL;
-	list.head    = NULL;
-	list.tail    = NULL;
+	list->size = NULL;
+	list->head = NULL;
+	list->tail = NULL;
 
-	if (destroy != NULL)
-	{
-		/* code */
-		list.destroy = destroy;
-	}
-	//设置默认释放方法。
-	else
-	{
-		list.destroy = free;
-	}
-	
+	list->destroy = destroy;
 }
 
 /*name:		destroyList()
@@ -40,14 +30,14 @@ void destroyList(List *list)
 	void *data;
 
 	//逐个删除链表element
-	while(list.size > 0)
+	while(list->size > 0)
 	{
 		//removeListElmtNext()作为判断条件的一部分，每次都会执行。
 		//若List初始化时指定了释放数据域指针空间的方法，则调用该方法释放数据域指针。
-		if (removeListElmtNext(list, NULL, (void **)&data) == 0 && list.destroy != NULL)
+		if (removeListElmtNext(list, NULL, (void **)&data) == 0 && list->destroy != NULL)
 		{
 			//释放数据域指针空间
-			list.destroy(data);
+			list->destroy(data);
 		}
 		//若初始化方法中指定了缺省的释放方法，则可采用以下语句：
 		//removeListElmtNext(list, NULL, (void **)&data);
@@ -73,34 +63,34 @@ int insertListElmtNext(List *list, ListElmt *element, const void *data)
 		return -1;
 	}
 
-	new_element.data = (void *)data;
+	new_element->data = (void *)data;
 
 	//插入链表头部
 	if (element == NULL)
 	{
 		//若链表为空
-		if (list.size == 0)
+		if (list->size == 0)
 		{
-			list.tail = new_element;
+			list->tail = new_element;
 		}
 
-		new_element.next = list.head;
-		list.head = new_element;
+		new_element->next = list->head;
+		list->head = new_element;
 	}
 	else
 	{
 		//若插入位置为连表尾部
-		if (element.next == NULL)
+		if (element->next == NULL)
 		{
-			list.tail = new_element;
+			list->tail = new_element;
 		}
 
-		new_element.next = element.next;
-		element.next = new_element;
+		new_element->next = element->next;
+		element->next = new_element;
 	}
 
 	//修改链表长度
-	list.size++;
+	list->size++;
 	return 0;
 }
 
@@ -117,7 +107,7 @@ int removeListElmtNext(List *list, ListElmt *element, void **data)
 	ListElmt *old_element;
 
 	//链表为空时
-	if (list.size == 0)	
+	if (list->size == 0)	
 	{
 		return -1;
 	}
@@ -127,39 +117,39 @@ int removeListElmtNext(List *list, ListElmt *element, void **data)
 	if (element == NULL)
 	{
 		//ListElmt结构类型的数据域为指针
-		*data       = list.head.data;
-		old_element = list.head;
-		list.head   = list.head.next;
+		*data       = list->head->data;
+		old_element = list->head;
+		list->head  = list->head->next;
 
-		if (list.size == 1)
+		if (list->size == 1)
 		{
-			list.tail = NULL;
+			list->tail = NULL;
 		}
 	}
 	//删除非头节点
 	else
 	{
 		//所给element为尾节点，无法删除后继节点
-		if (element.next == NULL)
+		if (element->next == NULL)
 		{
 			return -1;
 		}
 
 		//ListElmt结构类型的数据域为指针
-		*data        = element.next.data;
-		old_element  = element.next;
-		element.next = element.next.next;
+		*data         = element->next->data;
+		old_element   = element->next;
+		element->next = element->next->next;
 
 		//删除的时尾节点
-		if (element.next == NULL)
+		if (element->next == NULL)
 		{
-			list.tail = element;
+			list->tail = element;
 		}
 	}
 
 	free(old_element);
 
 	//修改链表长度
-	list.size--;
+	list->size--;
 	return 0;
 }
