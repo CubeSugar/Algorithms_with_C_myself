@@ -65,10 +65,17 @@ int insertChnTblElmt(ChnTbl *chntbl, const void *data);
 int removeChnTblElmt(ChnTbl *chntbl, void **data);
 
 /*name:		findChnTblElmt()
+ *input:	const ChnTbl *chntbl, const void *target
+ *return:	success 0, false -1
+ *function:	在哈希链表中查找与target匹配的元素
+ */
+int findChnTblELmt(const ChnTbl *chntbl, const void *target);
+
+/*name:		getChnTblElmt()
  *input:	const ChnTbl *chntbl, const void *target, void **data
  *return:	success 0, false -1
- *function:	在哈希链表中查找与target匹配的元素，若找到，将data只想哈希表中相匹配元素的数据域
+ *function:	在哈希链表中查找与target匹配的元素，若找到，将data哈希表中相匹配元素的数据域
  */
-int findChnTblELmt(const ChnTbl *chntbl, const void *target, void **data);
+int getChnTblElmt(const ChnTbl *chntbl, const void *target, void **data);
 
 #endif

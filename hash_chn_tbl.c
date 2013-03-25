@@ -33,7 +33,6 @@ int initChnTbl(ChnTbl *chntbl, int key_num,
 
 	for (int i = 0; i < key_num; ++i)
 	{
-		/* code */
 		initList(&chntbl->key_lists[i], destroy);
 	}
 
@@ -52,7 +51,14 @@ int initChnTbl(ChnTbl *chntbl, int key_num,
  */
 void destroyChnTbl(ChnTbl *chntbl)
 {
+	for (int i = 0; i < chntbl->key_num; ++i)
+	{
+		destroyList(&chntbl->key_lists[i]);
+	}
 
+	free(chntbl->key_lists);
+
+	memset(chntbl, 0, sizeof(ChnTbl));
 }
 
 /*name:		insertChnTblElmt()
@@ -62,7 +68,23 @@ void destroyChnTbl(ChnTbl *chntbl)
  */
 int insertChnTblElmt(ChnTbl *chntbl, const void *data)
 {
+	void *temp;
+	int key_temp, rtnval;
 
+	temp = (void *)data;
+	if (findChnTblElmt(chntbl, temp) == 0)
+	{
+		return 1;
+	}
+
+	key_temp = chntbl->hash(data) % chntbl->key_num;
+
+	if ((rtnval = insertListElmtNext(&chntbl->key_lists[key_temp], NULL, data)) == 0)
+	{
+		chntbl->size++;
+	}
+
+	return rtnval;
 }
 
 /*name:		removeChnTblElmt()
@@ -72,15 +94,76 @@ int insertChnTblElmt(ChnTbl *chntbl, const void *data)
  */
 int removeChnTblElmt(ChnTbl *chntbl, void **data)
 {
+	ListElmt *element, *prev;
+	int key_temp;
 
+	key_temp = chntbl->hash(*data) % chntbl->key_num;
+
+	prev = NULL;
+
+	for (element = &chntbl->key_lists[key_temp]->head; element != NULL; element = element->next)
+	{
+		if (chntbl->match(*data, element->data))
+		{
+			if (removeListElmtNext(&chntbl->key_lists[key_temp], prev, data) == 0)
+			{
+				chntbl->size--;
+				return 0;
+			}
+			else
+			{
+				return -1;
+			}
+		}
+		prev = element;
+	}
+
+	return -1;
 }
 
 /*name:		findChnTblElmt()
+ *input:	const ChnTbl *chntbl, const void *target
+ *return:	success 0, false -1
+ *function:	在哈希链表中查找与target匹配的元素
+ */
+int findChnTblELmt(const ChnTbl *chntbl, const void *target)
+{
+	ListElmt *element;
+	int key_temp;
+
+	key_temp = chntbl->hash(target) % chntbl->key_num;
+
+	for (element = &chntbl->key_lists[key_temp]->head; element != NULL; element = element->next)
+	{
+		if (chntbl->match(target, element->data))
+		{
+			return 0;
+		}
+	}
+
+	return -1;
+}
+
+/*name:		getChnTblElmt()
  *input:	const ChnTbl *chntbl, const void *target, void **data
  *return:	success 0, false -1
- *function:	在哈希链表中查找与target匹配的元素，若找到，将data只想哈希表中相匹配元素的数据域
+ *function:	在哈希链表中查找与target匹配的元素，若找到，将data哈希表中相匹配元素的数据域
  */
-int findChnTblELmt(const ChnTbl *chntbl, const void *target, void **data)
+int getChnTblElmt(const ChnTbl *chntbl, const void *target, void **data)
 {
+	ListElmt *element;
+	int key_temp;
 
+	key_temp = chntbl->hash(target) % chntbl->key_num;
+
+	for (element = &chntbl->key_lists[key_temp]->head; element != NULL; element = element->next)
+	{
+		if (chntbl->match(target, element->data))
+		{
+			*data = element->data;
+			return 0;
+		}
+	}
+
+	return -1;
 }
