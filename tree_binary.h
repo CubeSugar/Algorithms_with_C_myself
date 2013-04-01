@@ -35,14 +35,14 @@ void destroyTree(BiTree *tree);
 
 /*name:		insertTreeNodeLeft()
  *input:	BiTree *tree, BiTreeNode *node, const void *data
- *return:	success 0, false -1
+ *return:	success 0, failure -1
  *function:	insert TreeNode left child
  */
 int insertTreeNodeLeft(BiTree *tree, BiTreeNode *node, const void *data);
 
 /*name:		insertTreeNodeRight()
  *input:	BiTree *tree, BiTreeNode *node, const void *data
- *return:	success 0, false -1
+ *return:	success 0, failure -1
  *function:	insert TreeNode Right child
  */
 int insertTreeNodeRight(BiTree *tree, BiTreeNode *node, const void *data);
@@ -63,14 +63,14 @@ void removeTreeNodeRight(BiTree *tree, BiTreeNode *node);
 
 /*name:		mergeTree
  *input:	BiTree *merge, BiTree *left, BiTree *right, const void *data
- *return:	success 0, false -1
- *function:	merge
+ *return:	success 0, failure -1
+ *function:	合并left和right所指的树，并将data作为merge根节点数值域
  */
 int mergeTree(BiTree *merge, BiTree *left, BiTree *right, const void *data);
 
 /*name:		isTreeLeaf()
  *input:	const BiTreeNode *node
- *return:	node is leaf 1, false 0
+ *return:	node is leaf 1, failure 0
  *function:	is node a leaf
  */
 int isTreeLeaf(const BiTreeNode *node);
