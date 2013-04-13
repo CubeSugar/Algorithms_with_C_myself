@@ -15,3 +15,9 @@
 *.exe
 *.out
 *.app
+
+.DS_Store
+
+Algorithms_with_C_myself.1
+
+main.c
