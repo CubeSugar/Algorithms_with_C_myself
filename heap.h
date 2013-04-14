@@ -42,12 +42,12 @@ void destroyHeap(Heap *heap);
 int insertHeapElmt(Heap *heap, const void *data);
 
 /*------------------------------------------------------------------------------
- *name:         extractHeapElmt()
+ *name:         extractHeapTop()
  *arguments:    Heap *heap, void **data
  *return:       extract succeeds 0, fails -1
  *exception:
  *functions:    释放堆顶结点
  -----------------------------------------------------------------------------*/
-int extractHeapElmt(Heap *heap, void **data);
+int extractHeapTop(Heap *heap, void **data);
 
 #endif
