@@ -5,13 +5,16 @@
 #include "set.h"
 
 /*name:		initSet()
- *input:	Set *set, int (*match)(const void *key1,const void *key2), void (*destroy)(void *data)
+ *input:	Set *set, 
+			int (*match)(const void *key1,const void *key2),
+			void (*destroy)(void *data)
  *			集合；匹配方法（匹配返回1，否则0）；销毁方法
  *return:	none
  *function:	initial Set
  *
  */
-void initSet(Set *set, int (*match)(const void *key1,const void *key2), void (*destroy)(void *data))
+void initSet(Set *set, int (*match)(const void *key1,const void *key2),
+			 void (*destroy)(void *data))
 {
 	initList(set, destroy);
 	set->match = match;
@@ -242,6 +245,6 @@ int isSetEqual(const Set *set1, const Set *set2)
 		/* code */
 		return 0;
 	}
-
+	
 	return isSubSet(set1, set2); 
 }
