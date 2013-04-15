@@ -3,21 +3,25 @@
 #include "list.h"
 #include "queue.h"
 
-/*name:		enQueue()
- *input:	Queue *queue, const void *data
- *return:	success 0, false -1
- *function:	enter QueueElmt at Queue tail
- */
+/*------------------------------------------------------------------------------
+ *name:         enQueue()
+ *arguments:    Queue *queue, const void *data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    队尾入队
+ -----------------------------------------------------------------------------*/
 int enQueue(Queue *queue, const void *data)
 {
 	return insertListElmtNext(queue, queue->tail, data);
 }
 
-/*name:		deQueue()
- *input:	Queue *queue, void **data
- *return:	success 0, false -1
- *function:	delete QueueElmt at Queue head
- */
+/*------------------------------------------------------------------------------
+ *name:         deQueue()
+ *arguments:    Queue *queue, void **data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    队头出队
+ -----------------------------------------------------------------------------*/
 int deQueue(Queue *queue, void **data)
 {
 	return removeListElmtNext(queue, NULL, data);

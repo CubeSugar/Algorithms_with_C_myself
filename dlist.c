@@ -3,12 +3,13 @@
 
 #include "dlist.h"
 
-/*name:		initDList()
- *input:	DList *dlist, void (*destroy)(void *data)
- *			双向链表；释放数据域指针的方法
- *return:	none
- *function:	初始化由dlist指定的双链表
- */
+/*------------------------------------------------------------------------------
+ *name:         initDList()
+ *arguments:    DList *dlist, void (*destroy)(void *data)
+ *return:       void
+ *exception:
+ *functions:    初始化双向链表
+ -----------------------------------------------------------------------------*/
 void initDList(DList *dlist, void (*destroy)(void *data))
 {
 	dlist->size = 0;
@@ -25,12 +26,13 @@ void initDList(DList *dlist, void (*destroy)(void *data))
 	}
 }
 
-/*name:		destroyDList()
- *input:	DList *dlist
- *			双向链表
- *return:	none
- *function:	销毁由参数dlist指定的链表，并调用初始化时指定的destroy()方法释放数据域空间
- */
+/*------------------------------------------------------------------------------
+ *name:         destroyDList()
+ *arguments:    DList *dlist
+ *return:       void
+ *exception:
+ *functions:    销毁双向链表
+ -----------------------------------------------------------------------------*/
 void destroyDList(DList *dlist)
 {
 	void *data;
@@ -38,7 +40,8 @@ void destroyDList(DList *dlist)
 	whlie (dlist->size > 0)
 	{
 		//从链表尾部逐个删除元素，并释放数据域空间，&&连接判断条件后部分在使用缺省方法后可省略
-		if (removeDListElmt(dlist, dlist->tail, (void **)&data) == 0 && dlist->destroy != NULL)
+		if (removeDListElmt(dlist, dlist->tail, (void **)&data) == 0
+            && dlist->destroy != NULL)
 		{
 			dlist->destroy(data);
 		}
@@ -47,12 +50,13 @@ void destroyDList(DList *dlist)
 	memset(dlist, 0, sizeof(DList));
 }
 
-/*name:		insertDListElmtNext()
- *input:	DList *dlist, DListElmt *delement, const void *data
- *			双向链表；插入位置的前驱元素；指向待插入元素的指针
- *return:	插入成功返回0，插入失败返回-1
- *function:	向由dlist指定的，且前驱元素由delement指定的双链表中插入新元素
- */
+/*------------------------------------------------------------------------------
+ *name:         insertDListELmtNext()
+ *arguments:    DList *dlist, DListElmt *delement, const void *data
+ *return:       already exists 1, succeeds 0, fails -1
+ *exception:
+ *functions:    向双向链表中指定元素插入后继
+ -----------------------------------------------------------------------------*/
 int insertDListElmtNext(DList *dlist, DListElmt *delement, const void *data)
 {
 	DListElmt *new_delement;
@@ -102,12 +106,13 @@ int insertDListElmtNext(DList *dlist, DListElmt *delement, const void *data)
 	return 0;
 }
 
-/*name:		insertDListElmtPrev()
- *input:	DList *dlist, DListElmt *delement, const void *data
- *			双向链表；插入位置的后继元素；指向待插入元素的指针
- *return:	插入成功返回0，插入失败返回-1
- *function:	向由dlist指定的，且前后继素由delement指定的双链表中插入新元素
- */
+/*------------------------------------------------------------------------------
+ *name:         insertDListELmtPrev()
+ *arguments:    DList *dlist, DListElmt *delement, const void *data
+ *return:       already exists 1, succeeds 0, fails -1
+ *exception:
+ *functions:    向双向链表中指定元素插入前驱
+ -----------------------------------------------------------------------------*/
 int insertDListElmtPrev(DList *dlist, DListElmt *delement, const void *data)
 {
 	DListElmt *new_delement;
@@ -159,12 +164,13 @@ int insertDListElmtPrev(DList *dlist, DListElmt *delement, const void *data)
 	return 0;
 }
 
-/*name:		removeDListElmt()
- *input:	DList *dlist, DListElmt *delement, const void *data
- *			双向链表；待删除元素；指向被删除元素的指针
- *return:	插入成功返回0，插入失败返回-1
- *function:	从由dlist指定的双链表中删除由delement指定元素
- */
+/*------------------------------------------------------------------------------
+ *name:         removeDListElmt()
+ *arguments:    DList *dlist, DListElmt *delement, void **data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    移除指定元素
+ -----------------------------------------------------------------------------*/
 int removeDListElmt(DList *dlist, DListElmt *delement, void **data)
 {
 	//防止删除空元素或从空链表中删除元素

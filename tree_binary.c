@@ -3,11 +3,13 @@
 
 #include "tree_binary.h"
 
-/*name:		initBiTree()
- *input:	BiTree *tree, void (*destroy)(void *data)
- *return:	none
- *function:	initiate BiTree
- */
+/*------------------------------------------------------------------------------
+ *name:         initBiTree()
+ *arguments:    BiTree *tree, void (*destroy)(void *data)
+ *return:       void
+ *exception:
+ *functions:    初始化二叉树
+ *----------------------------------------------------------------------------*/
 void initBiTree(BiTree *tree, void (*destroy)(void *data))
 {
 	tree->size    = 0;
@@ -15,11 +17,13 @@ void initBiTree(BiTree *tree, void (*destroy)(void *data))
 	tree->root    = NULL;
 }
 
-/*name:		destroyTree()
- *input:	BiTree *tree
- *return:	none
- *function:	destroy BiTree
- */
+/*------------------------------------------------------------------------------
+ *name:         destroyTree()
+ *arguments:    BiTree *tree
+ *return:       void
+ *exception:
+ *functions:    destroy BiTree
+ *----------------------------------------------------------------------------*/
 void destroyTree(BiTree *tree)
 {
 	removeTreeNodeLeft(tree, NULL);
@@ -27,11 +31,13 @@ void destroyTree(BiTree *tree)
 	memset(tree, 0, sizeof(BiTree));
 }
 
-/*name:		insertTreeNodeLeft()
- *input:	BiTree *tree, BiTreeNode *node, const void *data
- *return:	success 0, failure -1
- *function:	向指定节点插入左节点，若指定节点为NULL，且为空树，则将插入节点设为root
- */
+/*------------------------------------------------------------------------------
+ *name:         insertTreeNodeLeft()
+ *arguments:    BiTree *tree, BiTreeNode *node, const void *data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    二叉树中插入左子结点
+ *----------------------------------------------------------------------------*/
 int insertTreeNodeLeft(BiTree *tree, BiTreeNode *node, const void *data)
 {
 	BiTreeNode *new_node, **position;
@@ -72,21 +78,21 @@ int insertTreeNodeLeft(BiTree *tree, BiTreeNode *node, const void *data)
 	return 0;
 }
 
-/*name:		insertTreeNodeRight()
- *input:	BiTree *tree, BiTreeNode *node, const void *data
- *return:	success 0, failure -1
- *function:	insert TreeNode Right child
- */
+/*------------------------------------------------------------------------------
+ *name:         insertTreeNodeRight()
+ *arguments:    BiTree *tree, BiTreeNode *node, const void *data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    二叉树中插入右子结点
+ *----------------------------------------------------------------------------*/
 int insertTreeNodeRight(BiTree *tree, BiTreeNode *node, const void *data)
 {
 	BiTreeNode *new_node, **position;
 
 	if (node == NULL)
 	{
-		/* code */
 		if (tree->size)
 		{
-			/* code */
 			return -1;
 		}
 		position = &tree->root;
@@ -95,7 +101,6 @@ int insertTreeNodeRight(BiTree *tree, BiTreeNode *node, const void *data)
 	{
 		if (node->right != NULL)
 		{
-			/* code */
 			return -1;
 		}
 		position = &node->right;
@@ -103,7 +108,6 @@ int insertTreeNodeRight(BiTree *tree, BiTreeNode *node, const void *data)
 
 	if ((new_node = (BiTreeNode *)malloc(sizeof(BiTreeNode))) == NULL)
 	{
-		/* code */
 		return -1;
 	}
 
@@ -116,21 +120,21 @@ int insertTreeNodeRight(BiTree *tree, BiTreeNode *node, const void *data)
 	return 0;
 }
 
-/*name:		removeTreeNodeLeft()
- *input:	BiTree *tree, BiTreeNode *node
- *return:	none
- *function:	remove TreeNode LeftTree
- */
+/*------------------------------------------------------------------------------
+ *name:         removeTreeNodeLeft()
+ *arguments:    BiTree *tree, BiTreeNode *node
+ *return:       void
+ *exception:
+ *functions:    移除左子结点
+ *----------------------------------------------------------------------------*/
 void removeTreeNodeLeft(BiTree *tree, BiTreeNode *node)
 {
 	BiTreeNode **position;
 
 	if (tree->size)
 	{
-		/* code */
 		if (node == NULL)
 		{
-			/* code */
 			position = &tree->root;
 		}
 		else
@@ -138,13 +142,11 @@ void removeTreeNodeLeft(BiTree *tree, BiTreeNode *node)
 
 		if (*position != NULL)
 		{
-			/* code */
 			removeTreeNodeLeft(tree, *position);
 			removeTreeNodeRight(tree, *position);
 
 			if (tree->destroy != NULL)
 			{
-				/* code */
 				tree->destroy((*position)->data);
 			}
 
@@ -156,21 +158,21 @@ void removeTreeNodeLeft(BiTree *tree, BiTreeNode *node)
 	}
 }
 
-/*name:		removeTreeNodeRight()
- *input:	BiTree *tree, BiTreeNode *node
- *return:	none
- *function:	remove TreeNode RightTree
- */
+/*------------------------------------------------------------------------------
+ *name:         removeTreeNodeRight()
+ *arguments:    BiTree *tree, BiTreeNode *node
+ *return:       void
+ *exception:
+ *functions:    移除右子结点
+ *----------------------------------------------------------------------------*/
 void removeTreeNodeRight(BiTree *tree, BiTreeNode *node)
 {
 	BiTreeNode **position;
 
 	if (tree->size)
 	{
-		/* code */
 		if (node == NULL)
 		{
-			/* code */
 			position = &tree->root;
 		}
 		else
@@ -178,13 +180,11 @@ void removeTreeNodeRight(BiTree *tree, BiTreeNode *node)
 
 		if (*position != NULL)
 		{
-			/* code */
 			removeTreeNodeLeft(tree, *position);
 			removeTreeNodeRight(tree, *position);
 
 			if (tree->destroy != NULL)
 			{
-				/* code */
 				tree->destroy((*position)->data);
 			}
 
@@ -196,18 +196,19 @@ void removeTreeNodeRight(BiTree *tree, BiTreeNode *node)
 	}
 }
 
-/*name:		mergeTree
- *input:	BiTree *merge, BiTree *left, BiTree *right, const void *data
- *return:	success 0, failure -1
- *function:	合并left和right所指的树，并将data作为merge根节点数值域
- */
+/*------------------------------------------------------------------------------
+ *name:         mergeTree()
+ *arguments:    BiTree *merge, BiTree *left, BiTree *right, const void *data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    合并两棵树
+ *----------------------------------------------------------------------------*/
 int mergeTree(BiTree *merge, BiTree *left, BiTree *right, const void *data)
 {
 	initBiTree(merge, left->destroy);
 
 	if (insertTreeNodeLeft(merge, NULL, data) != 0)
 	{
-		/* code */
 		destroyTree(merge);
 		return -1;
 	}
@@ -225,11 +226,13 @@ int mergeTree(BiTree *merge, BiTree *left, BiTree *right, const void *data)
 	return 0;
 }
 
-/*name:		isTreeLeaf()
- *input:	const BiTreeNode *node
- *return:	node is leaf 1, failure 0
- *function:	is node a leaf
- */
+/*------------------------------------------------------------------------------
+ *name:         isTreeLeaf()
+ *arguments:    const BiTreeNode *node
+ *return:       succeeds 1, fails 0
+ *exception:
+ *functions:    判断是否为叶结点
+ *----------------------------------------------------------------------------*/
 int isTreeLeaf(const BiTreeNode *node)
 {
 	return (node->left == NULL) && (node->right == NULL);

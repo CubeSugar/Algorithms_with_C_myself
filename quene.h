@@ -9,32 +9,43 @@ typedef List 	 Queue;
 typedef ListElmt QueueElmt;
 
 //public interface
-/*name:		initQueue
- *input:	Queue *queue, void (*destroy)(void *data)
- *return:	none
- *function:	init Queue
- */
+/*------------------------------------------------------------------------------
+ *name:         initQueue()
+ *arguments:    Queue *queue, void (*destroy)(void *data)
+ *return:       void
+ *exception:
+ *functions:    初始化队列
+ -----------------------------------------------------------------------------*/
 #define initQueue initList
 
-/*name:		destroyQueue
- *input:	Queue *queue
- *return:	none
- *function:	destroy Queue
- */
+
+/*------------------------------------------------------------------------------
+ *name:         destroyQueue()
+ *arguments:    Queue *queue
+ *return:       void
+ *exception:
+ *functions:    销毁队列
+ -----------------------------------------------------------------------------*/
 #define destroyQueue destroyList
 
-/*name:		enQueue()
- *input:	Queue *queue, const void *data
- *return:	success 0, false -1
- *function:	enter QueueElmt at Queue tail
- */
+
+/*------------------------------------------------------------------------------
+ *name:         enQueue()
+ *arguments:    Queue *queue, const void *data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    队尾入队
+ -----------------------------------------------------------------------------*/
 int enQueue(Queue *queue, const void *data);
 
-/*name:		deQueue()
- *input:	Queue *queue, void **data
- *return:	success 0, false -1
- *function:	delete QueueElmt at Queue head
- */
+
+/*------------------------------------------------------------------------------
+ *name:         deQueue()
+ *arguments:    Queue *queue, void **data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    队头出队
+ -----------------------------------------------------------------------------*/
 int deQueue(Queue *queue, void **data);
 
 #endif

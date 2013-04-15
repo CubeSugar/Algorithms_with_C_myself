@@ -9,32 +9,42 @@ tpyedef List 	 Stack;
 tpyedef ListElmt StackElmt;
 
 //public interface
-/*name:		iniStack()
- *input:	Stack *stack, void (*destroy)(void *data)
- *return:	none
- *function:	init stack
- */
+/*------------------------------------------------------------------------------
+ *name:         initStack()
+ *arguments:    Stack *stack, void (*destroy)(void *data)
+ *return:       void
+ *exception:
+ *functions:    初始化栈
+ -----------------------------------------------------------------------------*/
 #define initStack initList
 
-/*name:		destroyStack()
- *input:	Stack *stack
- *return:	none
- *function:	destroy stack
- */
+
+/*------------------------------------------------------------------------------
+ *name:         destroyStack()
+ *arguments:    Stack *stack
+ *return:       void
+ *exception:
+ *functions:    销毁栈
+ -----------------------------------------------------------------------------*/
 #define destroyStack destroyList
 
-/*name:		pushStack()
- *input:	Stack *stack, const void *data
- *return:	success 0, false -1
- *function:	insert StackElmt at Stack top
- */
-int pushStack(Stack *stack, const void *data);
+/*------------------------------------------------------------------------------
+ *name:         pushStackElmt()
+ *arguments:    Stack *stack, const void *data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    将元素压栈
+ -----------------------------------------------------------------------------*/
+int pushStackElmt(Stack *stack, const void *data);
 
-/*name:		popStack()
- *input:	Stack *stack, void **data
- *return:	success 0, false -1
- *function:	return Stack top StackElmt
- */
-int popStack(Stack *stack, void **data);
+
+/*------------------------------------------------------------------------------
+ *name:         popStackElmt()
+ *arguments:    Stack *stack, void **data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    将元素弹栈
+ -----------------------------------------------------------------------------*/
+int popStackElmt(Stack *stack, void **data);
 
 #endif

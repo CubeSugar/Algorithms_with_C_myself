@@ -4,12 +4,13 @@
 
 #include "list.h"
 
-/*name:		initList()
- *input:	List *list, void (*destroy)(void *data)
- 			链表；释放数据域指针方法，缺省方法为free
- *return:	none
- *function:	初始化参数List指定的列表。
- */
+/*------------------------------------------------------------------------------
+ *name:         initList()
+ *arguments:    List *list, void (*destroy)(void *data)
+ *return:       void
+ *exception:
+ *functions:    初始化链表
+ -----------------------------------------------------------------------------*/
 void initList(List *list, void (*destroy)(void *data))
 {
 	list->size = NULL;
@@ -19,11 +20,14 @@ void initList(List *list, void (*destroy)(void *data))
 	list->destroy = destroy;
 }
 
-/*name:		destroyList()
- *input:	List *list
- *return:	none
- *function:	销毁由参数list指定的链表。
- */
+
+/*------------------------------------------------------------------------------
+ *name:         destroyList()
+ *arguments:    List *list
+ *return:       void
+ *exception:
+ *functions:    销毁链表
+ -----------------------------------------------------------------------------*/
 void destroyList(List *list)
 {
 	//元素数据域指针寄存
@@ -47,14 +51,15 @@ void destroyList(List *list)
 	memset(list, 0, sizeof(List));
 }
 
-/*name:		insertListElmtNext()
- *input:	List *list, ListElmt *element, const void *data
- 			链表；待插入位置的前驱元素；待插入数据
- *return:	插入成功返回0，否则返回-1。
- *function:	在list指定的链表中element后面插入一个新元素。
- *			如果element设置为NULL，则新元素插入链表头部。
- *			新元素包含一个指向data的指针，故只要该元素在链表中，data所引用的内存空间就应该保持合法。
- */
+/*------------------------------------------------------------------------------
+ *name:         insertListElmtNext()
+ *arguments:    List *list, ListElmt *element, const void *data
+ *return:       already exists 1, insert succeeds 0, fails -1
+ *exception:
+ *functions:    在list指定的链表中element后面插入一个新元素。如果element设置为NULL，则新
+ *              元素插入链表头部。新元素包含一个指向data的指针，故只要该元素在链表中，data
+ *              所引用的内存空间就应该保持合法。
+ -----------------------------------------------------------------------------*/
 int insertListElmtNext(List *list, ListElmt *element, const void *data)
 {
 	ListElmt *new_element;
@@ -94,14 +99,14 @@ int insertListElmtNext(List *list, ListElmt *element, const void *data)
 	return 0;
 }
 
-/*name:		removeListElmtNext()
- *input:	List *list, ListElmt *element, void **data
- 			链表；待删除位置的前驱元素；指向被删除元素的指针
- *return:	移除成功返回0，否则返回-1。
- *function:	移除由list指定的链表中element后的那个元素。
- *			如果element设置为NULL，则移除链表头元素。
- *			调用返回后，data指向已移除元素中存储的数据。
- */
+/*------------------------------------------------------------------------------
+ *name:         removeListElmtNext()
+ *arguments:    List *list, ListElmt *element, void **data
+ *return:       remove succeeds 0, fails -1
+ *exception:
+ *functions:    移除由list指定的链表中element后的那个元素。如果element设置为NULL，则移除
+ *              链表头元素。调用返回后，data指向已移除元素中存储的数据。
+ -----------------------------------------------------------------------------*/
 int removeListElmtNext(List *list, ListElmt *element, void **data)
 {
 	ListElmt *old_element;

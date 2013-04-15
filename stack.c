@@ -3,22 +3,26 @@
 #include "list.h"
 #include "stack.h"
 
-/*name:		pushStack()
- *input:	Stack *stack, const void *data
- *return:	success 0, false -1
- *function:	insert StackElmt at Stack top
- */
-int pushStack(Stack *stack, const void *data)
+/*------------------------------------------------------------------------------
+ *name:         pushStackElmt()
+ *arguments:    Stack *stack, const void *data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    将元素压栈
+ *----------------------------------------------------------------------------*/
+int pushStackElmt(Stack *stack, const void *data)
 {
 	return insertListElmtNext(stack, NULL, data);
 }
 
-/*name:		popStack()
- *input:	Stack *stack, void **data
- *return:	success 0, false -1
- *function:	return Stack top StackElmt
- */
-int popStack(Stack *stack, void **data)
+/*------------------------------------------------------------------------------
+ *name:         popStackElmt()
+ *arguments:    Stack *stack, void **data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    将元素弹栈
+ *----------------------------------------------------------------------------*/
+int popStackElmt(Stack *stack, void **data)
 {
 	return removeListElmtNext(stack, NULL, data);
 }

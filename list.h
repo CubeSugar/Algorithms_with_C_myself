@@ -17,7 +17,6 @@ typedef struct ListElmt_
 //Define a structure for linked lists.
 typedef struct List_
 {
-	/* data */
 	int size;
 	//判断2个成员是否匹配，若匹配返回1，否则返回0
 	int (*match)(const void *key1, const void *key2);
@@ -29,36 +28,46 @@ typedef struct List_
 } List;
 
 //public interface
-/*name:		initList()
- *input:	List *list, void (*destroy)(void *data)
- *return:	none
- *function:	初始化参数List指定的列表。
- */
+/*------------------------------------------------------------------------------
+ *name:         initList()
+ *arguments:    List *list, void (*destroy)(void *data)
+ *return:       void
+ *exception:
+ *functions:    初始化链表
+ -----------------------------------------------------------------------------*/
 void initList(List *list, void (*destroy)(void *data));
 
-/*name:		destroyList()
- *input:	List *list
- *return:	none
- *function:	销毁由参数list指定的链表。
- */
+
+/*------------------------------------------------------------------------------
+ *name:         destroyList()
+ *arguments:    List *list
+ *return:       void
+ *exception:
+ *functions:    销毁链表
+ -----------------------------------------------------------------------------*/
 void destroyList(List *list);
 
-/*name:		insertListElmtNext()
- *input:	List *list, ListElmt *element, const void *data
- *return:	插入成功返回0，否则返回-1。
- *function:	在list指定的链表中element后面插入一个新元素。
- *			如果element设置为NULL，则新元素插入链表头部。
- *			新元素包含一个指向data的指针，故只要该元素在链表中，data所引用的内存空间就应该保持合法。
- */
+
+/*------------------------------------------------------------------------------
+ *name:         insertListElmtNext()
+ *arguments:    List *list, ListElmt *element, const void *data
+ *return:       already exists 1, insert succeeds 0, fails -1
+ *exception:
+ *functions:    在list指定的链表中element后面插入一个新元素。如果element设置为NULL，则新
+ *              元素插入链表头部。新元素包含一个指向data的指针，故只要该元素在链表中，data
+ *              所引用的内存空间就应该保持合法。
+ -----------------------------------------------------------------------------*/
 int insertListElmtNext(List *list, ListElmt *element, const void *data);
 
-/*name:		removeListElmtNext()
- *input:	List *list, ListElmt *element, void **data
- *return:	移除成功返回0，否则返回-1。
- *function:	移除由list指定的链表中element后的那个元素。
- *			如果element设置为NULL，则移除链表头元素。
- *			调用返回后，data指向已移除元素中存储的数据。
- */
+
+/*------------------------------------------------------------------------------
+ *name:         removeListElmtNext()
+ *arguments:    List *list, ListElmt *element, void **data
+ *return:       remove succeeds 0, fails -1
+ *exception:
+ *functions:    移除由list指定的链表中element后的那个元素。如果element设置为NULL，则移除
+ *              链表头元素。调用返回后，data指向已移除元素中存储的数据。
+ -----------------------------------------------------------------------------*/
 int removeListElmtNext(List *list, ListElmt *element, void **data);
 
 #endif

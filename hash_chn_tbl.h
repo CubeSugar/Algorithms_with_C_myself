@@ -24,58 +24,71 @@ tpyedef struct ChnTbl_
 
 //public interface
 
-/*name:		initChnTbl()
- *input:	ChnTbl *chntbl
-			//hash链表
- 			int key_num
-			//关键字个数
-            int (*hash)(const void *key)
-            //哈希方法
-            int (*match)(const void key1, const void *key2)
-            //元素匹配方法
- 			void (*destroy)(void *data)
- 			//元素销毁方法
- *return:	success 0, false -1;
- *function:	初始化哈希链表
- */
+
+/*------------------------------------------------------------------------------
+ *name:         initChnTbl()
+ *arguments:    ChnTbl *chntbl,
+                int key_num, 
+                int (*hash)(const void *key)
+                int (*match)(const void key1, const void *key2),
+                void (*destroy)(void *data)
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    初始化哈希链表
+ *----------------------------------------------------------------------------*/
 int initChnTbl(ChnTbl *chntbl, int key_num,
                int (*hash)(const void *key),
                int (*match)(const void key1, const void *key2),
  			   void (*destroy)(void *data));
 
-/*name:		destroyChnTbl()
- *input:	ChnTbl *chntbl
- *return:	none
- *function:	销毁哈希链表
- */
+
+/*------------------------------------------------------------------------------
+ *name:         destroyChnTbl()
+ *arguments:    ChnTbl *chntbl
+ *return:       void
+ *exception:
+ *functions:    销毁哈希链表
+ *----------------------------------------------------------------------------*/
 void destroyChnTbl(ChnTbl *chntbl);
 
-/*name:		insertChnTblElmt()
- *input:	ChnTbl *chntbl, const void *data
- *return:	already exist 1, success 0, false -1
- *function:	向哈希链表中插入元素，若已存在该元素，返回1，若插入成功，返回0，若插入失败，返回-1
- */
+
+/*------------------------------------------------------------------------------
+ *name:         insertChnTblElmt()
+ *arguments:    ChnTbl *chntbl, const void *data
+ *return:       already exists 1, succeeds 0, fails -1
+ *exception:
+ *functions:    向哈希链表中插入元素
+ *----------------------------------------------------------------------------*/
 int insertChnTblElmt(ChnTbl *chntbl, const void *data);
 
-/*name:		removeChnTblElmt()
- *input:	ChnTbl *chntbl, void **data
- *return:	success 0, false -1
- *function:	从哈希链表中删除元素，删除成功，返回0，删除失败，返回-1
- */
+
+/*------------------------------------------------------------------------------
+ *name:         removeChnTblElmt()
+ *arguments:    ChnTbl *chntbl, void **data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    从哈希链表中移除元素
+ *----------------------------------------------------------------------------*/
 int removeChnTblElmt(ChnTbl *chntbl, void **data);
 
-/*name:		findChnTblElmt()
- *input:	const ChnTbl *chntbl, const void *target
- *return:	success 0, false -1
- *function:	在哈希链表中查找与target匹配的元素
- */
+
+/*------------------------------------------------------------------------------
+ *name:         findChnTblElmt()
+ *arguments:    const ChnTbl *chntbl, const void *target
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    在哈希链表中查找目标元素
+ *----------------------------------------------------------------------------*/
 int findChnTblELmt(const ChnTbl *chntbl, const void *target);
 
-/*name:		getChnTblElmt()
- *input:	const ChnTbl *chntbl, const void *target, void **data
- *return:	success 0, false -1
- *function:	在哈希链表中查找与target匹配的元素，若找到，将data哈希表中相匹配元素的数据域
- */
+
+/*------------------------------------------------------------------------------
+ *name:         getChnTblElmt()
+ *arguments:    const ChnTbl *chntbl, const void *target, void **data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    获取哈希链表中的元素
+ *----------------------------------------------------------------------------*/
 int getChnTblElmt(const ChnTbl *chntbl, const void *target, void **data);
 
 #endif

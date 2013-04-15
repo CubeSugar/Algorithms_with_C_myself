@@ -1,11 +1,13 @@
 #include "list.h"
 #include "tree_traverse.h"
 
-/*name:		preorderTree()
- *input:	const BiTreeNode *node, List *list
- *return:	success 0, failure -1
- *function: 先序遍历以node为根的树，并将当前节点node插入链表list
- */
+/*------------------------------------------------------------------------------
+ *name:         preorderTree()
+ *arguments:    const BiTreeNode *node, List *list
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    先序遍历以node为根的树，并将当前遍历结点node插入链表
+ *----------------------------------------------------------------------------*/
 int preorderTree(const BiTreeNode *node, List *list)
 {
 	if (node != NULL)
@@ -38,11 +40,13 @@ int preorderTree(const BiTreeNode *node, List *list)
 	return 0;
 }
 
-/*name:		inorderTree()
- *input:	const BiTreeNode *node, List *list
- *return:	success 0, failure -1
- *function:	中序遍历以node为根的树，并将当前节点node插入链表list
- */
+/*------------------------------------------------------------------------------
+ *name:         inorderTree()
+ *arguments:    const BiTreeNode *node, List *list
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    中序遍历以node为根的树，并将当前遍历结点node插入链表
+ *----------------------------------------------------------------------------*/
 int inorderTree(const BiTreeNode *node, List *list)
 {
 	if (node != NULL)
@@ -76,11 +80,13 @@ int inorderTree(const BiTreeNode *node, List *list)
 
 }
 
-/*name:		postorderTree()
- *input:	cconst BiTreeNode *node, List *list
- *return:	success 0, failure -1
- *function:	后序遍历以node为根的树，并将当前节点node插入链表list
- */
+/*------------------------------------------------------------------------------
+ *name:         postorderTree()
+ *arguments:    const BiTreeNode *node, List *list
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    后续遍历以node为根的树，并将当前遍历结点node插入链表
+ *----------------------------------------------------------------------------*/
 int postorderTree(const BiTreeNode *node, List *list)
 {
 	if (node != NULL)

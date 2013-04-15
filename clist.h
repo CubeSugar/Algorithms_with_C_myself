@@ -5,14 +5,12 @@
 
 typedef struct CListElmt_
 {
-	/* data */
 	void *data;
 	struct CListElmt_ *next;
 } CListElmt;
 
 typedef struct CList_
 {
-	/* data */
 	int size;
 	int (*match)(const void *key1, const void *key2);
 	void (*destroy)(void *data);
@@ -20,40 +18,43 @@ typedef struct CList_
 } CList;
 
 //public interface
-/*name:		initCList()
- *input:	Clist *clist, void (*destroy)(void *data)
- *
- *return:	none
- *
- *function:	初始化循环链表
- */
-void initCList(Clist *clist, void (*destroy)(void *data));
+/*------------------------------------------------------------------------------
+ *name:         initCList()
+ *arguments:    CList *clist, void (*destroy)(void *data)
+ *return:       void
+ *exception:
+ *functions:    初始化循环链表
+ -----------------------------------------------------------------------------*/
+void initCList(CList *clist, void (*destroy)(void *data));
 
-/*name:	destroyCList()
- *input:	CList *clist
- *
- *return:	none
- *
- *function:	销毁循环链表
- */
+
+/*------------------------------------------------------------------------------
+ *name:         destroyCList()
+ *arguments:    CList *clist
+ *return:       void
+ *exception:
+ *functions:    销毁循环链表
+ -----------------------------------------------------------------------------*/
 void destroyCList(CList *clist);
 
-/*name:	insertClistElmtNext()
- *input:	CList *clist, CListElmt *celement, const void *data
- *
- *return:	success 0, false -1
- *
- *function:	在指定元素后插入新元素
- */
-int insertClistElmtNext(CList *clist, CListElmt *celement, const void *data);
 
-/*name:	removeCListElmtNext()
- *input:	CList *clist, CListElmt *celement, void **data
- *
- *return:	success 0, false -1
- *
- *function:	删除指定元素
- */
+/*------------------------------------------------------------------------------
+ *name:         insertCListElmtNext()
+ *arguments:    CList *clist, CListELmt *celement, const void *data
+ *return:       already exists 1, succeeds 0, fails -1
+ *exception:
+ *functions:    在指定元素后插入新元素
+ -----------------------------------------------------------------------------*/
+int insertCListElmtNext(CList *clist, CListElmt *celement, const void *data);
+
+
+/*------------------------------------------------------------------------------
+ *name:         removeCListElmtNext()
+ *arguments:    CList *clist, CListElmt *celement, void **data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    删除指定元素后继
+ -----------------------------------------------------------------------------*/
 int removeCListElmtNext(CList *clist, CListElmt *celement, void **data);
 
 #endif

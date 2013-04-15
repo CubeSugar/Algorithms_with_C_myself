@@ -9,86 +9,106 @@ typedef List Set;
 typedef ListElmt SetElmt;
 
 //public interface
+/*------------------------------------------------------------------------------
+ *name:         initSet()
+ *arguments:    Set *set, 
+                int (*match)(const void *key1,const void *key2), 
+                void (*destroy)(void *data)
+ *return:       void
+ *exception:    
+ *functions:    初始化集合
+ *----------------------------------------------------------------------------*/
+void initSet(Set *set, int (*match)(const void *key1,const void *key2),
+             void (*destroy)(void *data));
 
-/*name:		initSet()
- *input:	Set *set, int (*match)(const void *key1,const void *key2), void (*destroy)(void *data)
- *			集合；匹配方法（匹配返回1，否则0）；销毁方法
- *return:	none
- *function:	initial Set
- *
- */
-void initSet(Set *set, int (*match)(const void *key1,const void *key2), void (*destroy)(void *data));
 
-/*name:		destroySet()
- *input:	
- *return:
- *function:
- *
- */
+/*------------------------------------------------------------------------------
+ *name:         destroySet()
+ *arguments:    Set *set
+ *return:       void
+ *exception:
+ *functions:    销毁集合
+ *----------------------------------------------------------------------------*/
 #define destroySet destroyList
 
-/*name:		insertSetElmt()
- *input:	Set *set, const void *data
- *return:	already exist 1，insert success 0, false -1
- *function:	insert Set Element
- *
- */
+
+/*------------------------------------------------------------------------------
+ *name:         insertSetElmt()
+ *arguments:    Set *set, const void *data
+ *return:       already exists 1, succeeds 0, fails -1
+ *exception:
+ *functions:    插入集合元素
+ *----------------------------------------------------------------------------*/
 int insertSetElmt(Set *set, const void *data);
 
-/*name:		removeSetElmt()
- *input:	Set *set, void **data
- *return:	success 0, false -1
- *function:	remove ELement form Set
- *
- */
+
+/*------------------------------------------------------------------------------
+ *name:         removeSetElmt()
+ *arguments:    Set *set, void **data
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    移除集合元素
+ *----------------------------------------------------------------------------*/
 int removeSetElmt(Set *set, void **data);
 
-/*name:		unionSet()
- *input:	Set *set_u, const Set *set1, const Set *set2
- *return:	success 0, false -1
- *function
- *
- */
+
+/*------------------------------------------------------------------------------
+ *name:         unionSet()
+ *arguments:    Set *set_u, const Set *set1, const Set *set2
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    合并两个集合
+ *----------------------------------------------------------------------------*/
 int unionSet(Set *set_u, const Set *set1, const Set *set2);
 
-/*name:		intersectionSet()
- *input:	Set *set_i, const Set *set1, const Set *set2
- *return:	success 0, false -1
- *function
- *
- */
-int intersectionSet(Set *set_i, const Set *set1, const Set *set2);
 
-/*name:		differenceSet()
- *input:	Set *set_d, const Set *set1, const Set *set2
- *return:	success 0, false -1
- *function
- *
- */
+/*------------------------------------------------------------------------------
+ *name:         intersectSet()
+ *arguments:    Set *set_i, const Set *set1, const Set *set2
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    去两个集合交集
+ *----------------------------------------------------------------------------*/
+int intersectSet(Set *set_i, const Set *set1, const Set *set2);
+
+
+/*------------------------------------------------------------------------------
+ *name:         differSet()
+ *arguments:    Set *set_d, const Set *set1, const Set *set2
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    set1 - set2 的差集
+ *----------------------------------------------------------------------------*/
 int differenceSet(Set *set_d, const Set *set1, const Set *set2);
 
-/*name:		isSetMember()
- *input:	const Set *set, const void *data
- *return:	success 0, false -1
- *function
- *
- */
+
+/*------------------------------------------------------------------------------
+ *name:         isSetMember()
+ *arguments:    const Set *set, const void *data
+ *return:       succeeds 1, fails 0
+ *exception:
+ *functions:    判定元素是否为集合成员
+ *----------------------------------------------------------------------------*/
 int isSetMember(const Set *set, const void *data);
 
-/*name:		isSubSet()
- *input:	const Set *set1, const Set *set2
- *return:	success 0, false -1
- *function
- *
- */
+
+/*------------------------------------------------------------------------------
+ *name:         isSubSet()
+ *arguments:    const Set *set1, const Set *set2
+ *return:       succeeds 1, fails 0
+ *exception:
+ *functions:    判定set1是否是set2的子集
+ *----------------------------------------------------------------------------*/
 int isSubSet(const Set *set1, const Set *set2);
 
-/*name:		isSetEqual()
- *input:	const Set *set1, const Set *set2
- *return:	success 0, false -1
- *function
- *
- */
+
+/*------------------------------------------------------------------------------
+ *name:         isSetEqual()
+ *arguments:    const Set *set1, const Set *set2
+ *return:       succeeds 1, fails 0
+ *exception:
+ *functions:    判定两个集合是否相等
+ *----------------------------------------------------------------------------*/
 int isSetEqual(const Set *set1, const Set *set2);
 
 #endif

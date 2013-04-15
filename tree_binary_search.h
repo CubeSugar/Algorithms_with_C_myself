@@ -30,6 +30,8 @@ typedef BiTree BiSearchTree;
 void initBiSearchTree(BiSearchTree *biSearchTree,
 					  int (*compare)(const void *key1, const void *key2),
                       void (*destroy)(void *data));
+
+
 /*------------------------------------------------------------------------------
  *name:		destroyBiSearchTree()
  *argument:	BiSearchTree *biSearchTree
@@ -38,6 +40,7 @@ void initBiSearchTree(BiSearchTree *biSearchTree,
  *----------------------------------------------------------------------------*/
 void destroyBiSearchTree(BiSearchTree *biSearchTree);
 
+
 /*------------------------------------------------------------------------------
  *name:		insertAVLNode()
  *argument:	BiSearchTree *biSearchTree, const void *data
@@ -45,6 +48,7 @@ void destroyBiSearchTree(BiSearchTree *biSearchTree);
  *function:	insert an AVL Node
  *----------------------------------------------------------------------------*/
 int insertAVLNode(BiSearchTree *biSearchTree, const void *data);
+
 
 /*------------------------------------------------------------------------------
  *name:		removeAVLNode()
@@ -56,6 +60,7 @@ int insertAVLNode(BiSearchTree *biSearchTree, const void *data);
 			即biSearchTree.size值，并不会在移除一个结点后递减。
  *----------------------------------------------------------------------------*/
 int removeAVLNode(BiSearchTree *biSearchTree, const void *data);
+
 
 /*------------------------------------------------------------------------------
  *name:		findAVLNode()
