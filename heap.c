@@ -55,7 +55,16 @@ void destroyHeap(Heap *heap)
  *exception:
  *functions:    向堆中插入元素
  -----------------------------------------------------------------------------*/
-int insertHeapElmt(Heap *heap, const void *data);
+int insertHeapElmt(Heap *heap, const void *data)
+{
+    void *temp;
+    int ipos, ppos;
+    
+    
+    
+    
+    return 0;
+}
 
 /*------------------------------------------------------------------------------
  *name:         extractHeapTop()
