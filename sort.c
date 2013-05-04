@@ -94,7 +94,6 @@ static int compareInt(const void *int_num1, const void *int_num2)
     }
 }
 
-inline int compareInt(const void *int_num1, const void *int_num2);
 /*------------------------------------------------------------------------------
  *name:         partition()
  *arguments:    void *data, int elmt_size, int left_pos, int right_pos,
@@ -217,4 +216,157 @@ int quickSort(void *data, int size, int elmt_size,
 }
 
 
+/*----------------------------------------------------------------------------*
+ *                              归并排序算法                                    *
+ *----------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------
+ *name:         merge()
+ *arguments:    void *data,
+ *              int elmt_size,
+ *              int left_pos,
+ *              int mid_pos,
+ *              int right_pos,
+ *              int (*compare)(const void *key1, const void *key2)
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    归并两部分数据
+ *----------------------------------------------------------------------------*/
+static int merge(void *data, int elmt_size, int left_pos, int mid_pos,
+                 int right_pos,
+                 int (*compare)(const void *key1,const void *key2))
+{
+    char *a;
+    char *mergeBuffer;
+    
+    int aleft;
+    int aright;
+    int mgbuff_pos;
+    
+    //initial
+    a = data;
+    aleft = left_pos;
+    aright = mid_pos + 1;
+    mgbuff_pos = 0;
+    
+    if ((mergeBuffer = (char *)malloc(elmt_size * (right_pos - left_pos + 1)))
+        == NULL)
+    {
+        return -1;
+    }
+    
+    while (aleft <= mid_pos || aright <= right_pos)
+    {
+        if (aleft > mid_pos)
+        {
+            while (aright <= right_pos)
+            {
+                memcpy(&mergeBuffer[mgbuff_pos * elmt_size],
+                       &a[aright * elmt_size], elmt_size);
+                aright++;
+                mgbuff_pos++;
+            }
+            continue;
+        }
+        else if (aright > right_pos)
+        {
+            while (aleft <= mid_pos)
+            {
+                memcpy(&mergeBuffer[mgbuff_pos * elmt_size],
+                       &a[aleft * elmt_size], elmt_size);
+                
+                aleft++;
+                mgbuff_pos++;
+            }
+            continue;
+        }
+        
+        if (compare(&a[aleft * elmt_size], &a[aright * elmt_size]) < 0)
+        {
+            memcpy(&mergeBuffer[mgbuff_pos * elmt_size], &a[aleft * elmt_size],
+                   elmt_size);
+            
+            aleft++;
+            mgbuff_pos++;
+        }
+        else
+        {
+            memcpy(&mergeBuffer[mgbuff_pos * elmt_size], &a[aright * elmt_size],
+                   elmt_size);
+            
+            aright++;
+            mgbuff_pos++;
+        }
+    }
+    
+    memcpy(&a[left_pos * elmt_size], mergeBuffer,
+           elmt_size * (right_pos - left_pos + 1));
+    
+    free(mergeBuffer);    
+    
+    return 0;
+}
 
+
+/*------------------------------------------------------------------------------
+ *name:         mergeSort()
+ *arguments:    void *data,
+ *              int size,
+ *              int elmt_size,
+ *              int left_pos,
+ *              int right_pos,
+ *              int (*compare)(const void *key1, const void *key2)
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    归并排序算法。
+ *----------------------------------------------------------------------------*/
+int mergeSort(void *data, int size, int elmt_size, int left_pos, int right_pos,
+              int (*compare)(const void *key1, const void *key2))
+{
+    int mid_pos;
+    int left_size;
+    int right_size;
+    
+    if (left_pos < right_pos)
+    {
+        mid_pos = (int)((left_pos + right_pos - 1) / 2);
+        
+        left_size = mid_pos - left_pos + 1;
+        right_size = right_pos - mid_pos;
+        
+        if (mergeSort(data, size, elmt_size, left_pos, mid_pos, compare) < 0)
+        {
+            return -1;
+        }
+        
+        if (mergeSort(data, size, elmt_size, mid_pos + 1, right_pos, compare) < 0)
+        {
+            return -1;
+        }
+        
+        if (merge(data, elmt_size, left_pos, mid_pos, right_pos, compare) < 0)
+        {
+            return -1;
+        }
+    }
+    
+    return 0;
+}
+
+
+/*------------------------------------------------------------------------------
+ *name:         countSort()
+ *arguments:    int *data, int size, int k
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    计数排序算法
+ *----------------------------------------------------------------------------*/
+int countSort();
+
+/*------------------------------------------------------------------------------
+ *name:         radixSort()
+ *arguments:    int *data, int size, int p, int k
+ *return:       succeeds 0, fails -1
+ *exception:
+ *functions:    基数排序算法
+ *----------------------------------------------------------------------------*/
+int radixSort();
