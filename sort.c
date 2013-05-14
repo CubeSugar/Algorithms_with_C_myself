@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+//RadixSort
+#include <limits.h>
+#include <math.h>
+
 
 #include "sort.h"
 /*----------------------------------------------------------------------------*
@@ -355,18 +359,132 @@ int mergeSort(void *data, int size, int elmt_size, int left_pos, int right_pos,
 
 /*------------------------------------------------------------------------------
  *name:         countSort()
- *arguments:    int *data, int size, int k
+ *arguments:
+ *              int *data,
+ *              int size,
+ *              int maxIntElmt
  *return:       succeeds 0, fails -1
  *exception:
  *functions:    计数排序算法
  *----------------------------------------------------------------------------*/
-int countSort();
+int countSort(int *data, int size, int maxIntElmt)
+{
+    int k;
+    int *counts;
+    int *temp;
+    
+    //k为最大整数值加1
+    k = maxIntElmt + 1;
+    
+    //初始化
+    if ((counts = (int *)malloc(k * sizeof(int))) == NULL)
+    {
+        return -1;
+    }
+    
+    if ((temp = (int *)malloc(size * sizeof(int))) == NULL)
+    {
+        free(counts);
+        return -1;
+    }
+    
+    for (int i = 0; i < k; i++)
+    {
+        counts[i] = 0;
+    }
+    
+    //初始化当前频率
+    for (int j = 0; j < size; j++)
+    {
+        counts[data[j]] = counts[data[j]] + 1;
+    }
+    
+    //将频率加上偏移量生成位置值
+    for (int i = 1; i < k; i++)
+    {
+        counts[i] = counts[i] + counts[i - 1];
+    }
+    
+    //在temp空间中排序
+    for (int j = size -1; j >= 0; j--)
+    {
+        temp[counts[data[j]] - 1] = data[j];
+        counts[data[j]] = counts[data[j]] -1;
+    }
+    
+    memcpy(data, temp, size * sizeof(int));
+    
+    free(counts);
+    free(temp);    
+    
+    return 0;
+}
 
 /*------------------------------------------------------------------------------
  *name:         radixSort()
- *arguments:    int *data, int size, int p, int k
+ *arguments:    int *data,
+ *              int size, //待排序元素个数
+ *              int p, //元素位数
+ *              int k//进制
  *return:       succeeds 0, fails -1
  *exception:
  *functions:    基数排序算法
  *----------------------------------------------------------------------------*/
-int radixSort();
+int radixSort(int *data, int size, int p, int k)
+{
+    int *counts;
+    int *temp;
+    int index;//
+    int weight;//
+    
+    if ((counts = (int *)malloc(k * sizeof(int))) == NULL)
+    {
+        return -1;
+    }
+    
+    if ((temp = (int *)malloc(size * sizeof(int))) == NULL)
+    {
+        free(counts);
+        return -1;
+    }
+    
+    //从低位到高位使用计数排序
+    for (int n = 0; n < p; n++)
+    {
+        for (int i = 0; i < k; i++)
+        {
+            counts[i] = 0;
+        }
+        
+        //计算当前数位权值
+        weight = (int)pow((double)k, (double)n);
+        
+        //计算当前数位个元素频数
+        for (int j = 0; j < size; j++)
+        {
+            index = (int)(data[j] / weight) % k;
+            counts[index] = counts[index] + 1;
+        }
+        
+        //调整位置累积值
+        for (int i = 1; i < k; i++)
+        {
+            counts[i] = counts[i] + counts[i - 1];
+        }
+        
+        //排序
+        for (int j = size - 1; j >= 0; j--)
+        {
+            index = (int)(data[j] / weight) % k;
+            temp[counts[index] - 1] = data[j];
+            counts[index] = counts[index] - 1;
+        }
+        
+        memcpy(data, temp, size * sizeof(int));
+    }
+    
+    free(counts);
+    free(temp);
+    
+    return 0;
+}

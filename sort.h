@@ -49,21 +49,27 @@ int mergeSort(void *data, int size, int elmt_size, int left_pos, int right_pos,
 
 /*------------------------------------------------------------------------------
  *name:         countSort()
- *arguments:    int *data, int size, int k
+ *arguments:    
+ *              int *data, 
+ *              int size, 
+ *              int maxElmt 
  *return:       succeeds 0, fails -1
  *exception:
  *functions:    计数排序算法
  *----------------------------------------------------------------------------*/
-int countSort();
+int countSort(int *data, int size, int maxElmt);
 
 /*------------------------------------------------------------------------------
  *name:         radixSort()
- *arguments:    int *data, int size, int p, int k
+ *arguments:    int *data, 
+ *              int size, //待排序元素个数
+ *              int p, //元素位数
+ *              int k//进制
  *return:       succeeds 0, fails -1
  *exception:
  *functions:    基数排序算法
  *----------------------------------------------------------------------------*/
-int radixSort();
+int radixSort(int *data, int size, int p, int k);
 
 
 
