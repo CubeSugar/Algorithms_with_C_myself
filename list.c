@@ -158,3 +158,15 @@ int removeListElmtNext(List *list, ListElmt *element, void **data)
 	list->size--;
 	return 0;
 }
+
+/*------------------------------------------------------------------------------
+ *name:         displayList()
+ *arguments:    List *list
+ *return:       0
+ *exception:
+ *functions:    显示列表元素
+ *----------------------------------------------------------------------------*/
+int displayList(List *list)
+{
+    return 0;
+}

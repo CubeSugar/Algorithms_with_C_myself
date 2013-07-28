@@ -3,6 +3,8 @@
 
 #include <stdlib.h>
 
+#include "data.h"
+
 //define data type, e.g. int.
 typedef int datatype;
 
@@ -69,5 +71,15 @@ int insertListElmtNext(List *list, ListElmt *element, const void *data);
  *              链表头元素。调用返回后，data指向已移除元素中存储的数据。
  -----------------------------------------------------------------------------*/
 int removeListElmtNext(List *list, ListElmt *element, void **data);
+
+
+/*------------------------------------------------------------------------------
+ *name:         displayList()
+ *arguments:    List *list
+ *return:       0
+ *exception:
+ *functions:    显示列表元素
+ *----------------------------------------------------------------------------*/
+int displayList(List *list);
 
 #endif
